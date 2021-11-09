@@ -19,7 +19,6 @@ library(gridExtra)
 
 # Set working directory and load data #
 
-setwd("C:/Users/LThornley/Northern Gas/Emergency Response Staffing Analysis - Documents/2020/Data & Analysis/Auto Population")
 meantempdata6016<-read.csv("./Data/meantemp1960_2016.csv",sep=",",header=T)
 meantempdata1718<-read.csv("./Data/meantemp 170101_181231.csv",sep=",",header=T)
 
