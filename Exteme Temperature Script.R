@@ -1,14 +1,7 @@
-## This script contains the Extreme Value analysis to understand the 1 in 20 monthly temperature for the 9 BOL areas. 
-## This will feed into PRE, Reports and Repairs forecasts to understand the 1 in 20 temperature scenario for each year to understand the uplift
-## 1 in 20 has been chosen as the suitable limit as this relates to the Gas Networks requirement to ensure the network can with stand a 1 in 20 winters day
-
+## This script contains the Extreme Value analysis to understand the 1 in 20 monthly temperature for Leeds. 
 
 # install require packages for EVA #
 
-install.packages("devtools")
-install.packages("texmex")
-install.packages("ggfortify")
-install.packages("mojito")
 library(devtools)
 library(texmex)
 library(scales)
@@ -17,10 +10,13 @@ library(ggfortify)
 library(mojito)
 library(gridExtra)
 
-# Set working directory and load data #
+# Load and set up data #
 
-meantempdata6016<-read.csv("./Data/meantemp1960_2016.csv",sep=",",header=T)
-meantempdata1718<-read.csv("./Data/meantemp 170101_181231.csv",sep=",",header=T)
+urlfile<-'https://raw.githubusercontent.com/lauracattle/ExtremeMe/main/meantemp1960_2016.csv'
+meantempdata6016<-read.csv(urlfile,sep=",",header=T)
+
+urlfile2<-'https://raw.githubusercontent.com/lauracattle/ExtremeMe/main/meantemp%20170101_181231.csv'
+meantempdata1718<-read.csv(urlfile2,sep=",",header=T)
 
 Date <- c(meantempdata6016$Date,meantempdata1718$date)
 Month <- c(as.character(meantempdata6016$Month) ,as.character(meantempdata1718$Month))
@@ -72,7 +68,7 @@ grid.arrange(p1[[1]], p1[[2]], p2, ncol=2)
 
 # Fitting generalized Pareto distributions
 
-# Threshold of 9 to get around 5% outside 95% bands#
+# Threshold of 12 to get around 5% outside 95% bands#
 
 mod <- evm(r2, th=12)
 mod
